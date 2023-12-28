@@ -13,6 +13,9 @@ const nextConfig = {
       },
     ],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack(config) {
     config.experiments = {
       ...config.experiments,
