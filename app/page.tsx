@@ -1,5 +1,7 @@
 import Feed from "@/components/Feed";
 
+export const revalidate = 0;
+
 function Home() {
   return (
     <section className="w-full flex-col flex-center">

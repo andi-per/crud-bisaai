@@ -66,7 +66,7 @@ function Feed() {
       setIsLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   return (
     <section className="feed">
