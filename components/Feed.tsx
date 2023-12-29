@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import Loader from "./Loader";
 
+export const revalidate = 10;
+
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
