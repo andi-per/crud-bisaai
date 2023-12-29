@@ -13,7 +13,7 @@ function CreatePrompt() {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const createPrompt = async (evt) => {
+  const createPrompt = async (evt: Event) => {
     evt.preventDefault();
     setSubmitting(true);
 

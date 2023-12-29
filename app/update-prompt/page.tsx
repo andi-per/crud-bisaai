@@ -27,8 +27,8 @@ function UpdatePrompt() {
     if (promptId) getPromptDetails();
   }, [promptId]);
 
-  const updatePrompt = async (e) => {
-    e.preventDefault();
+  const updatePrompt = async (evt: Event) => {
+    evt.preventDefault();
     setIsSubmitting(true);
 
     if (!promptId) return alert("Missing PromptId!");

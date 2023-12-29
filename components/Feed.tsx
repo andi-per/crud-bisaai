@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
 import Loader from "./Loader";
-
-export const revalidate = 10;
+import { singlePost } from "@models/interface";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post) => (
+      {data.map((post: singlePost) => (
         <PromptCard
           key={post._id}
           post={post}
@@ -29,7 +28,7 @@ function Feed() {
   const [searchedResults, setSearchedResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: any) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
 
@@ -42,7 +41,7 @@ function Feed() {
     );
   };
 
-  const filterPrompts = (searchText: String) => {
+  const filterPrompts = (searchText: string | RegExp) => {
     const regex = new RegExp(searchText, "i");
     return posts.filter(
       (item) =>
@@ -52,7 +51,7 @@ function Feed() {
     );
   };
 
-  const handleTagClick = (tagName) => {
+  const handleTagClick = (tagName: string) => {
     setSearchText(tagName);
 
     const searchResult = filterPrompts(tagName);
@@ -61,14 +60,17 @@ function Feed() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("api/prompt");
+      const response = await fetch("api/prompt", {
+        next: { revalidate: 10 },
+      });
       const data = await response.json();
 
-      setPosts(data);
+      setPosts(data.filter((post: any) => post.hasOwnProperty("creator")));
+      console.log(data);
       setIsLoading(false);
     };
     fetchPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <section className="feed">
