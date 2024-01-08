@@ -6,7 +6,7 @@ import Provider from "@/components/Provider";
 
 export const metadata = {
   title: "BukuBagus",
-  description: "Temukan & Berbagi Buku Menarik",
+  description: "Temukan & Berbagi Buku Bagus",
 };
 
 type LayoutProps = {
@@ -16,6 +16,9 @@ type LayoutProps = {
 function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/assets/images/logo.svg" />
+      </head>
       <body>
         <Provider>
           <div className="main">
