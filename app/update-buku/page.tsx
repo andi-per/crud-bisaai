@@ -5,39 +5,48 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
-function UpdatePrompt() {
+function UpdatePost() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const promptId = searchParams.get("id");
+  const bookId = searchParams.get("id");
 
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [post, setPost] = useState({
+    title: "",
+    author: "",
+    reason: "",
+    tag: "",
+  });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`);
+    const getBookDetails = async () => {
+      const response = await fetch(`/api/book/${bookId}`);
       const data = await response.json();
 
       setPost({
-        prompt: data.prompt,
+        title: data.title,
+        author: data.author,
+        reason: data.reason,
         tag: data.tag,
       });
     };
 
-    if (promptId) getPromptDetails();
-  }, [promptId]);
+    if (bookId) getBookDetails();
+  }, [bookId]);
 
-  const updatePrompt = async (evt: Event) => {
+  const updateBook = async (evt: Event) => {
     evt.preventDefault();
     setIsSubmitting(true);
 
-    if (!promptId) return alert("Missing PromptId!");
+    if (!bookId) return alert("Missing BookId!");
 
     try {
-      const response = await fetch(`/api/prompt/${promptId}`, {
+      const response = await fetch(`/api/book/${bookId}`, {
         method: "PATCH",
         body: JSON.stringify({
-          prompt: post.prompt,
+          title: post.title,
+          author: post.author,
+          reason: post.reason,
           tag: post.tag,
         }),
       });
@@ -58,9 +67,9 @@ function UpdatePrompt() {
       post={post}
       setPost={setPost}
       submitting={submitting}
-      onSubmit={updatePrompt}
+      onSubmit={updateBook}
     />
   );
 }
 
-export default UpdatePrompt;
+export default UpdatePost;

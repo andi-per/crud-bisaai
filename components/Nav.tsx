@@ -41,20 +41,20 @@ function Nav() {
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/logo.svg"
-          alt="Promptopia Logo"
+          alt="BukuBagus Logo"
           width={30}
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="logo_text">BukuBagus</p>
       </Link>
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {session?.user && !isLoading ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">
-              Create Post
+            <Link href="/bagikan-buku" className="black_btn">
+              Bagi Buku
             </Link>
 
             <button className="outline_btn" onClick={() => signOut()}>
@@ -107,14 +107,14 @@ function Nav() {
                 href="/profile"
                 onClick={() => setToggleDropdown(false)}
               >
-                My Profile
+                Profil Saya
               </Link>
               <Link
                 className="dropdown_link"
-                href="/create-prompt"
+                href="/bagikan-buku"
                 onClick={() => setToggleDropdown(false)}
               >
-                Create Prompt
+                Bagi Buku
               </Link>
 
               <button

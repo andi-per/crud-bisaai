@@ -1,17 +1,15 @@
-import Prompt from "@models/prompt";
+import Book from "@models/book";
 import { connectToDb } from "@utils/database";
 
 export const GET = async (request, { params }) => {
   try {
     await connectToDb();
 
-    const prompts = await Prompt.find({ creator: params.id }).populate(
-      "creator"
-    );
+    const books = await Book.find({ creator: params.id }).populate("creator");
 
-    return new Response(JSON.stringify(prompts), { status: 200 });
+    return new Response(JSON.stringify(books), { status: 200 });
   } catch (error) {
-    return new Response("Failed to fetch prompts created by user", {
+    return new Response("Failed to fetch books created by user", {
       status: 500,
     });
   }

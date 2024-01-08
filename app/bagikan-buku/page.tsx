@@ -6,22 +6,29 @@ import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
 
-function CreatePrompt() {
+function CreatePost() {
   const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [post, setPost] = useState({
+    title: "",
+    author: "",
+    reason: "",
+    tag: "",
+  });
 
   const router = useRouter();
   const { data: session } = useSession();
 
-  const createPrompt = async (evt: Event) => {
+  const createPost = async (evt: Event) => {
     evt.preventDefault();
     setSubmitting(true);
 
     try {
-      const response = await fetch("/api/prompt/new", {
+      const response = await fetch("/api/book/new", {
         method: "POST",
         body: JSON.stringify({
-          prompt: post.prompt,
+          title: post.title,
+          author: post.author,
+          reason: post.reason,
           userId: session?.user.id,
           tag: post.tag,
         }),
@@ -39,13 +46,13 @@ function CreatePrompt() {
 
   return (
     <Form
-      type="Create"
+      type="Bagikan"
       post={post}
       setPost={setPost}
       submitting={submitting}
-      onSubmit={createPrompt}
+      onSubmit={createPost}
     />
   );
 }
 
-export default CreatePrompt;
+export default CreatePost;

@@ -1,18 +1,13 @@
 import Link from "next/link";
 
-type FormProps = {
-  type: String;
-};
-
 function Form({ type, post, setPost, submitting, onSubmit }: any) {
   return (
     <section className="w-full max-w-full flex-col flex-start">
       <h1 className="head_text text-left">
-        <span className="blue_gradient">{type} Post</span>
+        <span className="blue_gradient">{type} Buku</span>
       </h1>
       <p className="desc text-left max-w-md">
-        {type} and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform
+        Ayo, bagikan buku-buku favoritmu kepada dunia...
       </p>
 
       <form
@@ -21,13 +16,39 @@ function Form({ type, post, setPost, submitting, onSubmit }: any) {
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Your AI Prompt
+            Judul Buku
+          </span>
+          <input
+            value={post.title}
+            onChange={(e) => setPost({ ...post, title: e.target.value })}
+            type="text"
+            placeholder="#Title"
+            required
+            className="form_input"
+          />
+        </label>
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Penulis
+          </span>
+          <input
+            value={post.author}
+            onChange={(e) => setPost({ ...post, author: e.target.value })}
+            type="text"
+            placeholder="#Author"
+            required
+            className="form_input"
+          />
+        </label>
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Kenapa harus baca buku ini?
           </span>
 
           <textarea
-            value={post.prompt}
-            onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-            placeholder="Write your post here"
+            value={post.reason}
+            onChange={(e) => setPost({ ...post, reason: e.target.value })}
+            placeholder="#Reason"
             required
             className="form_textarea"
           />
@@ -35,9 +56,9 @@ function Form({ type, post, setPost, submitting, onSubmit }: any) {
 
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Field of Prompt{" "}
+            Genre Buku{" "}
             <span className="font-normal">
-              (#product, #webdevelopment, #idea, etc.)
+              (#fiksi, #non-fiksi, #sains, dll.)
             </span>
           </span>
           <input
@@ -52,7 +73,7 @@ function Form({ type, post, setPost, submitting, onSubmit }: any) {
 
         <div className="flex-end mx-3 mb-5 gap-4">
           <Link href="/" className="text-gray-500 text-sm">
-            Cancel
+            Kembali
           </Link>
 
           <button

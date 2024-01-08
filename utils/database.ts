@@ -12,7 +12,7 @@ export const connectToDb = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI!, {
-      dbName: "share_prompt",
+      dbName: "share_book",
     });
 
     isConnected = true;

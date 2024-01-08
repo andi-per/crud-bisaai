@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
-function PromptCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
+function BookCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
@@ -18,14 +18,8 @@ function PromptCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
 
-  const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
-    setTimeout(() => setCopied(""), 3000);
-  };
-
   return (
-    <div className="prompt_card">
+    <div className="book_card">
       <div className="flex justify-between items-start gap-5">
         <div
           className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
@@ -48,20 +42,11 @@ function PromptCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={handleCopy}>
-          <Image
-            src={
-              copied === post.prompt
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
-            }
-            alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
-            width={12}
-            height={12}
-          />
-        </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
+      <p className="font-semibold mt-4 mb-2 text-center ">{post.title}</p>
+      <p className="text-sm">penulis: {post.author}</p>
+      <div className="line h-px bg-gray-500 my-3"></div>
+      <p className="my-4 font-satoshi text-sm text-gray-700">{post.reason}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(post.tag)}
@@ -81,7 +66,7 @@ function PromptCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
             className="font-inter text-sm orange_gradient cursor-pointer"
             onClick={handleDelete}
           >
-            Delete
+            Hapus
           </p>
         </div>
       )}
@@ -89,4 +74,4 @@ function PromptCard({ post, handleTagClick, handleDelete, handleEdit }: any) {
   );
 }
 
-export default PromptCard;
+export default BookCard;

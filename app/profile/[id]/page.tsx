@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
+import { IBook } from "@models/interface";
 
-function PrompterProfile({ params }) {
+function UserProfile({ params }: any) {
   const searchParams = useSearchParams();
-  const prompterName = searchParams.get("name");
+  const username = searchParams.get("name");
 
-  const [prompterPosts, setPrompterPosts] = useState([]);
+  const [posts, setPosts] = useState<IBook[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function PrompterProfile({ params }) {
       const response = await fetch(`/api/users/${params?.id}/posts`);
       const data = await response.json();
 
-      setPrompterPosts(data);
+      setPosts(data);
       setIsLoading(false);
     };
 
@@ -26,12 +27,12 @@ function PrompterProfile({ params }) {
 
   return (
     <Profile
-      name={prompterName}
-      desc={`Welcome to ${prompterName}'s personalized profile page. Explore ${prompterName}'s exceptional prompts and be inspired by the power of their imagination`}
-      data={prompterPosts}
+      name={username}
+      desc={`Selamat datang di halaman profil ${username}. Temukan buku-buku bagus rekomendasi ${username} kepada Dunia.`}
+      data={posts}
       isLoading={isLoading}
     />
   );
 }
 
-export default PrompterProfile;
+export default UserProfile;

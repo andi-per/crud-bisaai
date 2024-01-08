@@ -5,25 +5,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
+import { IBook } from "@models/interface";
 
 function MyProfile() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [myPosts, setMyPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState<IBook[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`);
+  const handleEdit = (post: IBook) => {
+    router.push(`/update-buku?id=${post._id}`);
   };
-  const handleDelete = async (post) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
-    );
+  const handleDelete = async (post: IBook) => {
+    const hasConfirmed = confirm("Apakah anda yakin menghapus postingan ini?");
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/book/${post._id.toString()}`, {
           method: "DELETE",
         });
 
@@ -51,7 +50,7 @@ function MyProfile() {
   return (
     <Profile
       name="My"
-      desc="Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination"
+      desc="Selamat datang di halaman profil pribadi Anda. Bagikan judul buku-buku bagus versi Anda kepada Dunia."
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

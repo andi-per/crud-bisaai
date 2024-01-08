@@ -1,5 +1,6 @@
+import { IBook } from "@models/interface";
 import Loader from "./Loader";
-import PromptCard from "./PromptCard";
+import BookCard from "./BookCard";
 
 function Profile({
   name,
@@ -19,9 +20,9 @@ function Profile({
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="mt-10 prompt_layout">
-          {data.map((post) => (
-            <PromptCard
+        <div className="mt-10 book_layout">
+          {data.map((post: IBook) => (
+            <BookCard
               key={post._id}
               post={post}
               handleEdit={() => handleEdit && handleEdit(post)}

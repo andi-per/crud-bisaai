@@ -1,5 +1,8 @@
-export interface singlePost {
+export interface IBook {
   creator: any;
-  prompt: string;
+  title: string;
+  author: string;
+  reason: string;
   tag: string;
+  _id: string;
 }
